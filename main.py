@@ -14,7 +14,7 @@ GAS_PRICE:Final = 1.05
 OIL_PRICE:Final = 1.25
 LITRES_PER_CASE:Final = 12
 
-# Dera
+# Printing select statements
 print('-'*44)
 print("*** Welcome to Gas Station Program ***")
 print('-'*44)
@@ -25,6 +25,7 @@ print("O: Oil")
 
 purchase_type = input(">>> ")
 
+# Assigning the product type and taking quantity input
 if purchase_type == "G" or purchase_type == 'g':
     oil_gas_check = False
     product = "Gas"
@@ -37,7 +38,7 @@ else:
     print("Invalid input, you should enter g/G or o/O")
     exit()
 
-# Brett
+# Checking if the input quantity is valid
 if QUANTITY <= 0:
   if oil_gas_check: #If oil
     print("Number of oil cases should be > 0")
@@ -46,7 +47,7 @@ if QUANTITY <= 0:
     print("Number of gas litres should be > 0")
     exit()
 else:
-  #Province input with gst
+  # Assigning GST according to the province input
   province = input("Please enter the 2 letters province abbreviation: ")
 
   match province:
@@ -57,7 +58,7 @@ else:
     case _:
       gst = 15/100
 
-#Calculate Discount
+# Assigning applicable discount on the selected product
 if oil_gas_check and QUANTITY > 6:
   discount = 10/100 #percent discount
 elif oil_gas_check == False and QUANTITY > 2000:
@@ -65,7 +66,7 @@ elif oil_gas_check == False and QUANTITY > 2000:
 else:
   discount = 0
 
-#calculate Prices
+# Calculate cost based on the quantity of product
 if oil_gas_check: #for oil
   num_litres = QUANTITY * LITRES_PER_CASE 
   original_price = num_litres * OIL_PRICE
@@ -73,12 +74,12 @@ else: #for gas
   num_litres = QUANTITY
   original_price = num_litres * GAS_PRICE
 
-#Applying discount and GST
+# Applying discount and GST
 final_price = original_price * (1 - discount)
 total_gst = final_price * gst
 final_price_after_gst = final_price + total_gst
 
-# Heet
+# Printing the final output table
 print('-'*100)
 print(format('Product', '10s'), format('# Of Litres', '15s'), format('Price Before Discount', '25s'), format('Price After Discount', '24s'), format('GST', '7s'), 'Total Price')
 print(format(f'{product:^8}', '10s'), format(f'{QUANTITY:^13}', '15s'), format(f'{original_price:^23}', '25s'), format(f'{final_price:^22}', '24s'), format(f'{total_gst:^5}', '7s'), f'{final_price_after_gst:^12}')
